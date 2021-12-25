@@ -1,0 +1,160 @@
+/* ここから下に記載していく */
+@charset "utf-8";
+
+html{
+    font-size: 62.5%;/*16px×62.5%=10px*/
+}
+
+body{
+    color: #333333;
+    font-family:"Open Sans",'ヒラギノ角ゴ ProN W3', Hiragino Kaku Gothic ProN, "メイリオ", Meiryo, sans-serif;
+    font-size: 1.6rem;
+    width: auto;
+    margin:auto;
+}
+
+input,textarea{
+    font-family: inherit;
+    font-size: 1.6rem;
+  }
+ 
+
+.text-center{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2.4rem;
+}
+
+/* Header */
+.header{
+    height: 50px;
+    background-color: #fff;
+}
+
+.header__logo{
+    margin: 0 0 0 20px;
+    width: 250px;
+    height: auto;
+}
+
+/* About */
+.about{
+    padding: 30px 0 30px;
+    background-color: #db8641;
+}
+
+.about__title{
+    color: #ffffff;
+    margin: 0 0 30px;
+}
+
+.about__title2{
+    color: #d46103;
+    margin: 0 0 30px;
+}
+
+
+.about__text{
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin: 0 0 20px;
+}
+
+/* From */
+.form{
+    padding: 30px 0 30px;
+    background-color: #fbdcc2;
+}
+
+.formbody{
+    width: 800px;
+    margin: auto;
+}
+
+
+.uname{
+    display: block;
+    padding: 5px;
+    margin: 10px 0px;
+    text-align: left;
+    width: 500px;
+}
+
+.review{
+    display: block;
+    padding: 5px 0;
+    text-align: center;
+    margin: 10px 0px;
+    height: 40px;
+    font-size: 1.8rem;
+    width: 200px;
+}
+
+.freetext{
+    display: block;
+    margin: auto;
+    width: 800px;
+    height: 150px;
+    padding: 5px;
+    font-size: 1.6rem;
+    border-top:double 3px;
+    border-bottom:double 3px;
+    border-color: #909090;
+    /* border-radius: 10px; */
+}
+
+button{
+    display: block;
+    margin: 20px auto;
+    padding: 5px 0;
+    text-align: center;
+    width: 100px;
+    background-color: #ffb61a;
+    color: #fff ;
+    text-decoration: none;
+    font-size: 1.6rem;
+    border: 0;
+}
+
+button:hover {
+	opacity: 0.6;
+}
+
+.delete{
+    display: block;
+    margin: auto;
+    padding: 5px 0;
+    text-align: center;
+    width: 100px;
+    background-color: #cacaca;
+    color: #fff ;
+    text-decoration: none;
+    font-size: 1.6rem;
+    border: 0;
+}
+
+.delete:hover {
+	opacity: 0.6;
+}
+
+.output_wrapper{
+    width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    display: block;
+    border-top:double 3px;
+    border-bottom:double 3px;
+    border-color: #909090;
+    /* border-radius: 10px; */
+    text-align: center;
+}
+
+.unamelist{
+    font-weight: bold;
+}
+.outputlist{
+    margin: 10px;
+}

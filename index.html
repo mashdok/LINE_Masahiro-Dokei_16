@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabelog</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+     <!-- コンテンツ表示画面 -->
+
+     <header id="header" class="header">
+        <div class="wrapper header-wrapper">
+          <img src="img/2.jpg" alt="ロゴ" class="header__logo">
+        </div>
+      </header>
+
+      <section id="about" class="about">
+        <div class="about-subsection">
+          <h3 class="about__title text-center">このサイトについて</h3>
+          <p class="about__text">このサイトは今まで行ったレストランを保存しておくためのサイトです。</p>
+          <p class="about__text">記録を通じて記憶の風化からいいレストランを守りましょう☺</p>
+        </div>
+        </section>
+   
+    <section id="form" class="form">
+        <h3 class="about__title2 text-center">登録フォーム</h3>
+        <div class="formbody">
+            <div class="formlist">
+                <div><input type="text" class="uname" id="uname" placeholder="店名"></div>
+                <div>
+                    <select name="レビュー" class="review" id="review">
+                        <option value="★★★★★">★★★★★</option>
+                        <option value="★★★★☆">★★★★☆</option>
+                        <option value="★★★☆☆">★★★☆☆</option>
+                        <option value="★★☆☆☆">★★☆☆☆</option>
+                        <option value="★☆☆☆☆">★☆☆☆☆</option>
+                </div>
+            </div>
+            <div><textarea class="freetext" id="text" cols="30" rows="10"></textarea></div>
+        </div> 
+        <button id="send">送信</button>
+
+    </section>
+    <section id="list" class="list">
+            <div id="output" style="overflow: auto;height: 1500px;"></div>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved } 
+        from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyA8XeReXAU2iT258h9juVeWsihBnLlHXmY",
+          authDomain: "g-s-test-d72d1.firebaseapp.com",
+          projectId: "g-s-test-d72d1",
+          storageBucket: "g-s-test-d72d1.appspot.com",
+          messagingSenderId: "503234805507",
+          appId: "1:503234805507:web:186b2ff23f30c3c2e17336"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // 追加2
+        const db  = getDatabase(app); //RealtimeDBに接続
+        const dbRef = ref(db,"chat"); //RealtimeDB内の"chat"を使う
+
+        console.log(dbRef,"vv");
+
+        // 送信
+        $("#send").on("click",function(){
+            const uname = $("#uname").val();
+            const review = $("#review").val();
+            const text = $("#text").val();
+            // alert(uname+text);//取得確認
+        });
+
+        // データ登録
+        $("#send").on("click",function(){
+            const msg = {
+                uname: $("#uname").val(),
+                review: $("#review").val(),
+                text: $("#text").val()
+            }
+            const newPostRef = push(dbRef); //pushできる状況を作って…？
+            set(newPostRef, msg);//DBに値をセットする？
+        });
+
+        $("#text").on("keydown",function(e){
+            if(e.keyCode ==13) {
+            const msg = {
+                uname: $("#uname").val(),
+                review: $("#review").val(),
+                text: $("#text").val()
+            }
+            const newPostRef = push(dbRef); //pushできる状況を作って…？
+            set(newPostRef, msg);//DBに値をセットする？
+        }
+        });
+
+        onChildAdded(dbRef,function(data){
+            const msg = data.val();
+            const key = data.key;
+            let h = ` 
+                <div class="output_wrapper" data-key=${key}>  
+                <div class="output">
+                <p class="unamelist outputlist">${msg.uname}</p>
+                <p class="reviewlist outputlist">${msg.review}</p>
+                <p class="textlist outputlist">${msg.text}</p>
+                </div>
+                <i class="delete" id="delete">削除</i>
+                </div>`;
+            $("#output").append(h); //outputの最後に追加    
+        });
+
+        $(document).on("click","#delete",function(){ 
+            let check = window.confirm('削除しますか？');  
+            if (check = true){
+        
+            let v = $(this).parent().data().key; 
+            remove(ref(db, 'chat/' + v));
+            $(this).parent().remove();}
+    });
+
+      </script>
+
+</body>
+</html>
